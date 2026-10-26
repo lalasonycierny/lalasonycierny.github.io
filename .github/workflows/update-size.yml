@@ -1,0 +1,68 @@
+name: Update Repo Size
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Spustí sa automaticky každý deň o polnoci
+  workflow_dispatch:      # Umožňuje spustiť aktualizáciu aj manuálne cez webové rozhranie GitHubu
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Povolenie na zápis do repozitára (commit zmeny)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Calculate and update size
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: 'lalasonicycierny'
+        run: |
+          python -c '
+          import os, requests
+          username = os.getenv("USERNAME")
+          headers = {"Authorization": f"Bearer {os.getenv("GH_TOKEN")}"} if os.getenv("GH_TOKEN") else {}
+          total_kb = 0
+          page = 1
+          
+          while True:
+              res = requests.get(f"https://api.github.com/users/{username}/repos?per_page=100&page={page}", headers=headers)
+              if res.status_code != 200:
+                  break
+              repos = res.json()
+              if not repos:
+                  break
+              for r in repos:
+                  total_kb += r.get("size", 0)
+              if len(repos) < 100:
+                  break
+              page += 1
+          
+          total_mb = round(total_kb / 1024, 2)
+          
+          with open("README.md", "r", encoding="utf-8") as f:
+              content = f.read()
+          
+          start, end = "<!-- REPO_SIZE_START -->", "<!-- REPO_SIZE_END -->"
+          if start in content and end in content:
+              before = content.split(start)[0]
+              after = content.split(end)[1]
+              new_content = f"{before}{start} **{total_mb} MB** {end}{after}"
+              with open("README.md", "w", encoding="utf-8") as f:
+                  f.write(new_content)
+          '
+
+      - name: Commit and push if README changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet || (git commit -am "Update total repository size" && git push)
