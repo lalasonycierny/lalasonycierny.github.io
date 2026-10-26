@@ -10,6 +10,72 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f6f8fa;
+            color: #24292f;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #d0d7de;
+            width: 100%;
+            max-width: 480px;
+        }
+        h1 { margin-bottom: 24px; font-size: 24px; }
+        .links { display: flex; flex-direction: column; gap: 16px; }
+        a {
+            text-decoration: none;
+            color: #0969da;
+            font-weight: 600;
+            padding: 12px 24px;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            background: #fafbfc;
+            transition: all 0.2s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        a:hover {
+            background: #0969da;
+            color: white;
+            border-color: #0969da;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Moje Dopravné Projekty</h1>
+    <div class="links">
+        <a href="https://lalasonycierny.github.io/ba-livetraffic/" target="_blank">🚗 Bratislava – Živá premávka</a>
+        <a href="https://lalasonycierny.github.io/idos-meskanie/" target="_blank">🚂 IDOS Meškanie vlakov</a>
+        <a href="https://lalasonycierny.github.io/idos-mapazsr/" target="_blank">🗺️ IDOS ŽSR Mapa a štatistiky</a>
+        <a href="https://lalasonycierny.github.io/idos-grafy/" target="_blank">📊 IDOS Grafy obsadenosti</a>
+        <a href="https://lalasonycierny.github.io/mhd-stats/" target="_blank">🚌 mhd-stats – Bratislava MHD</a>
+    </div>
+</div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lalasonycierny - Projekty</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
             background-color: #f6f8fa;
