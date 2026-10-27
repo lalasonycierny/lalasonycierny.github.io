@@ -70,21 +70,20 @@
     
     <h2>🚗 Dopravné Projekty</h2>
     <div class="links">
-        <a href="https://lalasonycierny.github.io/ba-livetraffic/" target="_blank">🚗 Bratislava – Živá premávka</a>
-        <a href="https://lalasonycierny.github.io/idos-meskanie/" target="_blank">🚂 IDOS Meškanie vlakov</a>
-        <a href="https://lalasonycierny.github.io/idos-mapazsr/" target="_blank">🗺️ IDOS ŽSR Mapa a štatistiky</a>
-        <a href="https://lalasonycierny.github.io/idos-grafy/" target="_blank">📊 IDOS Grafy obsadenosti</a>
-        <a href="https://lalasonycierny.github.io/idos-grafy/indexx.html" target="_blank">📊 IDOS Grafy obsadenosti 2</a>
-        <a href="https://lalasonycierny.github.io/mhd-stats/" target="_blank">🚌 mhd-stats – Bratislava MHD</a>
+        <a href="https://github.io" target="_blank">🚗 Bratislava – Živá premávka</a>
+        <a href="https://github.io" target="_blank">🚂 IDOS Meškanie vlakov</a>
+        <a href="https://github.io" target="_blank">🗺️ IDOS ŽSR Mapa a štatistiky</a>
+        <a href="https://github.io" target="_blank">📊 IDOS Grafy obsadenosti</a>
+        <a href="https://github.ioindexx.html" target="_blank">📊 IDOS Grafy obsadenosti 2</a>
+        <a href="https://github.io" target="_blank">🚌 mhd-stats – Bratislava MHD</a>
     </div>
 
     <h2>🚂 IDOS Sekcia</h2>
     <div class="links">
-        <a href="https://lalasonycierny.github.io/idos-meskanie/" target="_blank">🚂 IDOS Meškanie vlakov</a>
-        <a href="https://lalasonycierny.github.io/idos-grafy/" target="_blank">📊 IDOS Grafy obsadenosti</a>
+        <a href="https://github.io" target="_blank">🚂 IDOS Meškanie vlakov</a>
+        <a href="https://github.io" target="_blank">📊 IDOS Grafy obsadenosti</a>
     </div>
 
-    <!-- Tu sa automaticky zobrazí veľkosť repozitára -->
     <div class="repo-info">
         <span>📦</span>
         <span id="velkost-repozitara">Načítavam veľkosť repozitára...</span>
@@ -97,14 +96,12 @@ async function zobrazVelkostRepozitara() {
   const repo = "lalasonycierny"; 
 
   try {
-    // Volanie oficiálneho GitHub API
     const response = await fetch(`https://github.com{username}/${repo}`);
-    if (!response.ok) throw new Error("Nepodarilo sa spojiť s GitHub API");
+    if (!response.ok) throw new Error("Chyba pri komunikácii s GitHub API");
     
     const data = await response.json();
     const velkostKB = data.size; 
     
-    // Automatický prepočet na MB, ak je repozitár väčší
     const vyslednaVelkost = velkostKB > 1024 
       ? (velkostKB / 1024).toFixed(2) + " MB" 
       : velkostKB + " KB";
@@ -116,7 +113,6 @@ async function zobrazVelkostRepozitara() {
   }
 }
 
-// Spustenie hneď po načítaní stránky
 zobrazVelkostRepozitara();
 </script>
 
